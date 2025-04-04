@@ -1,0 +1,46 @@
+<%- include('../partials/header') %>
+
+<div class="container mt-5" style="max-width: 400px;">
+  <h2 class="mb-4 text-center">Login</h2>
+
+  <% if (error) { %>
+    <div class="alert alert-danger"><%= error %></div>
+  <% } %>
+
+  <form method="POST" action="/login" novalidate>
+    <div class="mb-3">
+      <label>Email</label>
+      <input
+        type="email"
+        name="email"
+        class="form-control"
+        required
+        placeholder="you@example.com"
+      >
+    </div>
+
+    <div class="mb-3">
+      <label>Password</label>
+      <input
+        type="password"
+        name="password"
+        class="form-control"
+        required
+        minlength="6"
+        placeholder="••••••"
+      >
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Login</button>
+  </form>
+
+  <!-- 🔗 Register Link -->
+  <div class="text-center mt-3">
+    <p class="text-muted">Don't have an account?
+      <a href="/register">Register here</a>
+    </p>
+  </div>
+</div>
+
+<script src="/js/validation.js"></script>
+<%- include('../partials/footer') %>

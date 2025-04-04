@@ -1,0 +1,45 @@
+<%- include('../partials/header') %>
+
+<div class="container mt-4">
+  <h2>My Orders</h2>
+
+  <% if (!orders.length) { %>
+    <p>You haven't placed any orders yet.</p>
+  <% } else { %>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Order Date</th>
+          <th>Items</th>
+          <th>Total</th>
+          <th>Status</th>
+          <th>Invoice</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% orders.forEach(order => { %>
+          <tr>
+            <td><%= new Date(order.createdAt).toLocaleDateString() %></td>
+            <td>
+              <ul class="mb-0">
+                <% order.items.forEach(i => { %>
+                  <li><%= i.productId?.name %> x <%= i.quantity %></li>
+                <% }) %>
+              </ul>
+            </td>
+            <td>$<%= order.totalAmount.toFixed(2) %></td>
+            <td><%= order.status %></td>
+            <td>
+              <form method="GET" action="/orders/invoice">
+                <input type="hidden" name="orderId" value="<%= order._id %>">
+                <a href="/orders/invoice?orderId=<%= order._id %>" class="btn btn-sm btn-outline-primary">View Invoice</a>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,65 @@
+<%- include('../partials/header') %>
+
+<div class="container mt-4">
+  <h2 class="mb-4">Admin Dashboard</h2>
+
+  <!-- 🔍 Search Bar -->
+  <form method="GET" action="/products" class="mb-3 d-flex gap-2 flex-wrap">
+    <input type="text" name="search" class="form-control" placeholder="Search products..." value="<%= search || '' %>">
+  
+    <select name="category" class="form-select" style="max-width: 200px;">
+      <option value="all" <%= category === 'all' ? 'selected' : '' %>>All Categories</option>
+      <% categories.forEach(c => { %>
+        <option value="<%= c %>" <%= category === c ? 'selected' : '' %>><%= c %></option>
+      <% }) %>
+    </select>
+  
+    <button class="btn btn-outline-secondary" type="submit">Filter</button>
+  </form>
+
+  <!-- ➕ Add Product -->
+  <a href="/products/add" class="btn btn-primary mb-3">Add Product</a>
+
+  <!-- 📦 Product Table -->
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price ($)</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (products.length === 0) { %>
+        <tr><td colspan="5">No products found.</td></tr>
+      <% } else { %>
+        <% products.forEach(product => { %>
+          <tr>
+            <td>
+              <% if (product.image) { %>
+                <img src="<%= product.image %>" style="width: 60px; height: 60px; object-fit: cover;">
+              <% } else { %> N/A <% } %>
+            </td>
+            <td><%= product.name %></td>
+            <td><%= product.category %></td>
+            <td>
+              $<%= (product.price !== undefined && product.price !== null)
+                    ? Number(product.price).toFixed(2)
+                    : '0.00' %>
+            </td>
+            <td>
+              <a href="/products/edit/<%= product._id %>" class="btn btn-sm btn-warning">Edit</a>
+              <form method="POST" action="/products/delete/<%= product._id %>" style="display: inline-block;" onsubmit="return confirm('Delete this product?');">
+                <button class="btn btn-sm btn-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../partials/footer') %>

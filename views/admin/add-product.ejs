@@ -1,0 +1,111 @@
+<%- include('../partials/header') %>
+
+<div class="container mt-4">
+  <h2><%= product && product._id ? 'Edit' : 'Add' %> Product</h2>
+
+  <% if (error) { %>
+    <div class="alert alert-danger"><%= error %></div>
+  <% } %>
+
+  <form method="POST" enctype="multipart/form-data"
+        action="<%= product && product._id ? '/products/edit/' + product._id : '/products/add' %>"
+        novalidate>
+    
+    <!-- Name -->
+    <div class="mb-3">
+      <label>Name</label>
+      <input type="text" name="name" class="form-control"
+             value="<%= product?.name || '' %>" required placeholder="Enter product name">
+    </div>
+
+    <!-- Price -->
+    <div class="mb-3">
+      <label>Price ($)</label>
+      <input type="number" name="price" class="form-control"
+             min="0.01" step="0.01" value="<%= product?.price || '' %>"
+             required placeholder="e.g. 29.99">
+    </div>
+
+    <!-- Category -->
+    <div class="mb-3">
+      <label>Category</label>
+      <select name="categoryDropdown" class="form-select">
+        <% categories.forEach(cat => { %>
+          <option value="<%= cat %>" <%= product?.category === cat ? 'selected' : '' %>><%= cat %></option>
+        <% }) %>
+      </select>
+      <small class="text-muted">Or add your own:</small>
+      <input type="text" name="newCategory" class="form-control mt-1" placeholder="Custom category (optional)">
+    </div>
+
+    <!-- Image Type -->
+    <div class="mb-3">
+      <label>Image Type</label>
+      <select name="imageType" class="form-select" onchange="toggleImageInput(this.value)">
+        <option value="url" <%= product?.imageType === 'url' ? 'selected' : '' %>>Use Image URL</option>
+        <option value="upload" <%= product?.imageType === 'upload' ? 'selected' : '' %>>Upload Image</option>
+      </select>
+    </div>
+
+    <!-- Image URL -->
+    <div class="mb-3" id="imageUrlGroup">
+      <label>Image URL</label>
+      <input type="url" id="imageUrl" name="imageUrl" class="form-control"
+             value="<%= product?.imageType === 'url' ? product.image : '' %>"
+             pattern="https?://.+"
+             placeholder="https://example.com/image.jpg"
+             title="Please enter a valid URL">
+    </div>
+
+    <!-- Upload Image -->
+    <div class="mb-3 d-none" id="imageUploadGroup">
+      <label>Upload Image</label>
+      <input type="file" name="imageUpload" id="imageFile" class="form-control">
+    </div>
+
+    <!-- Current Image -->
+    <% if (product?.image) { %>
+      <div class="mb-3">
+        <label>Current Image:</label><br />
+        <img src="<%= product.image %>" alt="Current" style="max-width: 150px;">
+      </div>
+    <% } %>
+
+    <!-- Description -->
+    <div class="mb-3">
+      <label>Description</label>
+      <textarea name="description" class="form-control" rows="4" required
+                placeholder="Enter product description"><%= product?.description || '' %></textarea>
+    </div>
+
+    <!-- Submit -->
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="/products" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+
+<script>
+  function toggleImageInput(type) {
+    const urlGroup = document.getElementById('imageUrlGroup');
+    const uploadGroup = document.getElementById('imageUploadGroup');
+    const urlInput = document.getElementById('imageUrl');
+    const fileInput = document.getElementById('imageFile');
+
+    urlGroup.classList.toggle('d-none', type !== 'url');
+    uploadGroup.classList.toggle('d-none', type !== 'upload');
+
+    if (type === 'url') {
+      urlInput.required = true;
+      fileInput.required = false;
+    } else {
+      urlInput.required = false;
+      fileInput.required = true;
+    }
+  }
+
+  toggleImageInput('<%= product?.imageType || "url" %>');
+</script>
+
+<script src="/js/validation.js"></script>
+
+<%- include('../partials/footer') %>

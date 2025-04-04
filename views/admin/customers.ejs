@@ -1,0 +1,36 @@
+<%- include('../partials/header') %>
+
+<div class="container mt-4">
+  <h2>Customer List</h2>
+
+  <% if (!users.length) { %>
+    <p>No customers found.</p>
+  <% } else { %>
+    <table class="table table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Address</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach(u => { %>
+          <tr>
+            <td><%= u.name %></td>
+            <td><%= u.email %></td>
+            <td><%= u.address %></td>
+            <td>
+              <form method="POST" action="/admin/customers/delete/<%= u._id %>" onsubmit="return confirm('Are you sure you want to delete this customer and all their orders?')">
+                <button class="btn btn-sm btn-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>

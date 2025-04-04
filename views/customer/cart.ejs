@@ -1,0 +1,75 @@
+<%- include('../partials/header') %>
+
+<div class="container mt-4">
+  <h2>My Cart</h2>
+
+  <% if (!cart || !cart.items.length) { %>
+    <p>Your cart is empty.</p>
+    <a href="/products" class="btn btn-secondary">Continue Shopping</a>
+  <% } else { %>
+    <table class="table table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% let total = 0; %>
+        <% cart.items.forEach(item => {
+             const product = item.productId;
+             const itemTotal = product.price * item.quantity;
+             total += itemTotal;
+        %>
+          <tr>
+            <td><%= product.name %></td>
+            <td>$<%= product.price %></td>
+            <td>
+              <!-- ✅ Quantity Update Form -->
+              <form method="POST" action="/cart/update" class="d-flex align-items-center" novalidate>
+                <input type="hidden" name="productId" value="<%= product._id %>">
+                <button type="button" class="btn btn-outline-secondary btn-sm me-1" onclick="this.parentNode.querySelector('input[name=quantity]').stepDown()">−</button>
+                <input
+                  type="number"
+                  name="quantity"
+                  min="1"
+                  required
+                  value="<%= item.quantity %>"
+                  class="form-control form-control-sm text-center"
+                  style="width: 60px;"
+                >
+                <button type="button" class="btn btn-outline-secondary btn-sm ms-1" onclick="this.parentNode.querySelector('input[name=quantity]').stepUp()">+</button>
+            </td>
+            <td>$<%= itemTotal.toFixed(2) %></td>
+            <td class="d-flex gap-1">
+                <button class="btn btn-sm btn-primary">Update</button>
+              </form>
+
+              <!-- ❌ Remove Form -->
+              <form method="POST" action="/cart/remove">
+                <input type="hidden" name="productId" value="<%= product._id %>">
+                <button class="btn btn-sm btn-danger">Remove</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+        <tr>
+          <td colspan="3" class="text-end"><strong>Total:</strong></td>
+          <td colspan="2"><strong>$<%= total.toFixed(2) %></strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- ✅ Action Buttons -->
+    <div class="d-flex justify-content-between">
+      <a href="/products" class="btn btn-secondary">← Continue Shopping</a>
+      <a href="/orders/checkout" class="btn btn-success">Proceed to Checkout</a>
+    </div>
+  <% } %>
+</div>
+
+<script src="/js/validation.js"></script>
+<%- include('../partials/footer') %>

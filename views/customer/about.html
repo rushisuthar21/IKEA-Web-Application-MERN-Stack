@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About Us - IKEA</title>
+  <link rel="icon" href="/public/images/fav/favicon.ico" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/styles.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <!-- Boxicons CSS (Ensure it's included in your layout) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css">
+  <style>
+    /* Modern Styling for About Us Page */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+}
+
+.navbar {
+  background-color: #004F9E;
+}
+
+h2 {
+  font-size: 2.5rem;
+  color: #004F9E;
+}
+
+h4 {
+  font-size: 1.25rem;
+}
+
+footer {
+  background-color: #333;
+}
+
+footer p {
+  margin-bottom: 0;
+}
+
+img {
+  border-radius: 10px;
+}
+
+.row img {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+[data-aos] {
+  transition: all 0.6s ease-out;
+}
+    .footer {
+    background-color: white;
+    color: black;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid #ddd;
+  }
+  
+  .footer .social-icons {
+    margin-top: 10px;
+  }
+  
+  .footer .icons1 {
+    color: black;
+    font-size: 24px;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+  }
+  
+  .footer .icons1:hover {
+    color: #555; /* Slightly darker shade on hover */
+  }
+
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-dark" style="background-color: #004F9E;">
+    <a class="navbar-brand d-flex align-items-center fw-bold fs-4 text-white" href="/">
+      <img src="/public/images/ikea.png" alt="IKEA Logo" height="40" class="me-2">
+    </a>
+    <div class="d-flex align-items-center">
+      <a href="/" class="nav-link text-white me-3">Home</a>
+      <a href="/about" class="nav-link text-white me-3">About Us</a>
+      <a href="/contact" class="nav-link text-white me-3">Contact Us</a>
+    </div>
+  </nav>
+
+  <!-- About Us Content -->
+  <div class="container mt-5">
+    <h2 class="fw-bold text-center mb-4">About Us</h2>
+    <p class="text-center">We are IKEA, a global leader in home furnishings. Founded in 1943, IKEA offers modern, affordable, and sustainable furniture and decor for every home.</p>
+    
+    <div class="row">
+      <div class="col-md-6" data-aos="fade-right">
+        <h4 class="text-primary">Our History</h4>
+        <p>IKEA was founded in 1943 by Ingvar Kamprad in Sweden. Over the years, it has grown to become a leading name in home furnishings worldwide. Our philosophy is to offer high-quality, functional products at prices that are affordable for the many people, not just the few.</p>
+      </div>
+      <div class="col-md-6" data-aos="fade-left">
+        <h4 class="text-primary">Our Mission</h4>
+        <p>Our mission is to create a better everyday life for the many people by offering a wide variety of well-designed, functional products at affordable prices. We believe in a sustainable future for both people and the planet.</p>
+      </div>
+    </div>
+
+    <!-- Image Sliders -->
+    <div class="row mt-4">
+      <div class="col-md-4" data-aos="flip-left">
+        <img src="/public/images/1.png" class="w-100" alt="IKEA History 1">
+      </div>
+      <div class="col-md-4" data-aos="flip-up">
+        <img src="/public/images/2.png" class="w-100" alt="IKEA History 2">
+      </div>
+      <div class="col-md-4" data-aos="flip-right">
+        <img src="/public/images/3.png" class="w-100" alt="IKEA History 3">
+      </div>
+      <div class="col-md-4" data-aos="flip-right">
+        <img src="/public/images/7.png" class="w-100" alt="IKEA History 3">
+      </div>
+      <div class="col-md-4" data-aos="flip-right">
+        <img src="/public/images/4.png" class="w-100" alt="IKEA History 3">
+      </div>
+      <div class="col-md-4" data-aos="flip-right">
+        <img src="/public/images/5.jpg" class="w-100" alt="IKEA History 3">
+      </div>
+      <div class="col-md-4" data-aos="flip-right">
+        <img src="/public/images/6.jpg" class="w-100" alt="IKEA History 3">
+      </div>
+      <div class="col-md-4" data-aos="flip-right">
+        <img src="/public/images/8.jpg" class="w-100" alt="IKEA History 3">
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container text-center">
+      <p class="fw-bold">© 2025 IKEA. All Rights Reserved.</p>
+      <div class="social-icons">
+        <a href="https://www.linkedin.com" class="icons1"><i class='bx bxl-linkedin'></i></a>
+        <a href="https://www.twitter.com" class="icons1"><i class='bx bxl-twitter'></i></a>
+        <a href="https://www.instagram.com" class="icons1"><i class="bx bxl-instagram"></i></a>
+        <a href="https://www.facebook.com" class="icons1"><i class="bx bxl-facebook"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 2400,  // Setting duration to 1500ms (1.5 seconds)
+    });
+  </script>
+</body>
+</html>
