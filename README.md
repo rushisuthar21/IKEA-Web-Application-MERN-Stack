@@ -64,3 +64,38 @@ Change shipping status of any order (Pending/Shipped)
 Client-side: Ensures valid card number format, required fields filled, etc.
 
 Server-side: Verifies data integrity before writing to the database
+
+📦 Prerequisites
+Make sure you have the following installed:
+
+Node.js (v14+)
+
+MongoDB (local or Atlas)
+
+npm (comes with Node.js)
+
+Git
+
+1️⃣ Clone the Repository
+git clone https://github.com/your-username/ikea-home-decor.git
+cd ikea-home-decor
+
+2️⃣ Set Up the Backend (Express + MongoDB)
+cd server
+npm install
+
+🔧 Create a .env file inside the server folder with the following content:
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+
+🚀 Start the backend server:
+npm start
+It should run on http://localhost:5000.
+
+🔐 Admin Credentials
+To access admin features, login with:
+Username: admin@example.com
+Password: admin123
+
+The Webiste Will look like this:
