@@ -90,12 +90,13 @@ MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
 
 🚀 Start the backend server:
-npm start
-It should run on http://localhost:5000.
+npm start<br>
+It should run on http://localhost:3000.
 
 🔐 Admin Credentials
-To access admin features, login with:
-Username: admin@example.com
+To access admin features, login with:<br>
+Username: admin@example.com<br>
 Password: admin123
 
 The Webiste Will look like this:
+![Screenshot (187)](https://github.com/user-attachments/assets/8650024a-d35a-4f46-b480-f78b39422ad8)
