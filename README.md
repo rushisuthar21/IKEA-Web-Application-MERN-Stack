@@ -99,4 +99,24 @@ Username: admin@example.com<br>
 Password: admin123
 
 The Webiste Will look like this:
-![Screenshot (187)](https://github.com/user-attachments/assets/8650024a-d35a-4f46-b480-f78b39422ad8)
+![Screenshot (187)](https://github.com/user-attachments/assets/b90ca267-0153-4a42-afd0-73a437c397d1)
+![Screenshot (188)](https://github.com/user-attachments/assets/c6660136-4874-43d4-bdbf-e77aec55033d)
+![Screenshot (189)](https://github.com/user-attachments/assets/591311d8-af45-4fc5-bec3-419bbb8c8782)
+![Screenshot (190)](https://github.com/user-attachments/assets/904a4731-fd36-433c-83b0-6e98b2928e55)
+![Screenshot (191)](https://github.com/user-attachments/assets/da1a472b-f04b-4be6-92ec-44d5537c5c80)
+![Screenshot (192)](https://github.com/user-attachments/assets/6ba6059e-1aca-4ebe-86e1-9af224096b4c)
+![Screenshot (193)](https://github.com/user-attachments/assets/f1223b88-eb4d-4e51-baa7-4d4709746bc7)
+![Screenshot (194)](https://github.com/user-attachments/assets/4da7cba0-e043-436f-869e-129424846fde)
+![Screenshot (195)](https://github.com/user-attachments/assets/dde02acd-ad67-48a5-b37f-6993c23e30ab)
+![Screenshot 2025-04-04 224531](https://github.com/user-attachments/assets/3e860f6e-2e39-4948-80b3-853d9a0adff1)
+![Screenshot 2025-04-04 224600](https://github.com/user-attachments/assets/bd622974-b68f-432f-a658-a405dd650c58)
+![Screenshot 2025-04-04 224640](https://github.com/user-attachments/assets/ee9736c2-8fa6-41da-9c96-21393018b941)
+![Screenshot 2025-04-04 224654](https://github.com/user-attachments/assets/854123ac-d845-4be5-ab61-4622a4de5c2f)
+
+
+
+
+
+
+
+
