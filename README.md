@@ -95,7 +95,7 @@ It should run on http://localhost:3000.
 
 🔐 Admin Credentials
 To access admin features, login with:<br>
-Username: admin@example.com<br>
+Username: admin@store.com<br>
 Password: admin123
 
 The Webiste Will look like this:
