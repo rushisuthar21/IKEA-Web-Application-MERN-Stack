@@ -1,12 +1,12 @@
 <%- include('../partials/header') %>
 
-<div class="container mt-4">
-  <h2>All Customer Orders</h2>
+<div class="container mt-4 mb-5">
+  <h2 class="page-title" data-aos="fade-up">All Customer Orders</h2>
 
   <!-- 🔍 Search + Status Filter Form -->
-  <form method="GET" action="/orders/admin/orders" class="mb-3 d-flex gap-2 flex-wrap">
-    <input type="text" name="search" class="form-control" placeholder="Search by name or email..." value="<%= search || '' %>">
-    
+  <form method="GET" action="/orders/admin/orders" class="content-panel mb-4 d-flex gap-2 flex-wrap" data-aos="fade-up">
+    <input type="text" name="search" class="form-control" placeholder="Search by name or email..." value="<%= search || '' %>" style="max-width: 280px;">
+
     <select name="status" class="form-select" style="max-width: 200px;">
       <option value="all" <%= statusFilter === 'all' ? 'selected' : '' %>>All Statuses</option>
       <option value="Pending" <%= statusFilter === 'Pending' ? 'selected' : '' %>>Pending</option>
@@ -15,55 +15,60 @@
       <option value="Cancelled" <%= statusFilter === 'Cancelled' ? 'selected' : '' %>>Cancelled</option>
     </select>
 
-    <button class="btn btn-outline-secondary" type="submit">Filter</button>
+    <button class="btn btn-outline-secondary" type="submit"><i class='bx bx-filter-alt'></i> Filter</button>
   </form>
 
   <% if (!orders.length) { %>
-    <p>No orders yet.</p>
+    <div class="empty-state content-panel" data-aos="fade-up">
+      <div class="empty-icon"><i class='bx bx-receipt'></i></div>
+      <h5>No orders yet</h5>
+    </div>
   <% } else { %>
-    <table class="table table-bordered mt-3">
-      <thead>
-        <tr>
-          <th>Customer</th>
-          <th>Email</th>
-          <th>Items</th>
-          <th>Total ($)</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% orders.forEach(order => { %>
+    <div class="table-responsive content-panel" data-aos="fade-up">
+      <table class="table table-modern align-middle mb-0">
+        <thead>
           <tr>
-            <td><%= order.customerDetails.name %></td>
-            <td><%= order.customerDetails.email %></td>
-            <td>
-              <ul>
-                <% order.items.forEach(i => { %>
-                  <li><%= i.productId?.name %> x <%= i.quantity %></li>
-                <% }) %>
-              </ul>
-            </td>
-            <td>$<%= order.totalAmount.toFixed(2) %></td>
-            <td><%= order.status || 'Pending' %></td>
-            <td>
-              <!-- 🔍 View Details Button -->
-              <a href="/orders/admin/orders/<%= order._id %>" class="btn btn-sm btn-outline-info w-100 mb-2">View Details</a>
-
-              <!-- 🔄 Status Update Form -->
-              <form method="POST" action="/orders/admin/orders/<%= order._id %>/status">
-                <select name="status" class="form-select form-select-sm mb-2">
-                  <% ['Pending', 'Shipped', 'Delivered', 'Cancelled'].forEach(s => { %>
-                    <option value="<%= s %>" <%= order.status === s ? 'selected' : '' %>><%= s %></option>
-                  <% }) %>
-                </select>
-                <button class="btn btn-sm btn-primary w-100" type="submit">Update</button>
-              </form>
-            </td>
+            <th>Customer</th>
+            <th>Email</th>
+            <th>Items</th>
+            <th>Total ($)</th>
+            <th>Status</th>
+            <th>Action</th>
           </tr>
-        <% }) %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% orders.forEach(order => { %>
+            <tr>
+              <td class="fw-semibold"><%= order.customerDetails.name %></td>
+              <td><%= order.customerDetails.email %></td>
+              <td>
+                <ul class="mb-0 ps-3">
+                  <% order.items.forEach(i => { %>
+                    <li><%= i.productId?.name %> x <%= i.quantity %></li>
+                  <% }) %>
+                </ul>
+              </td>
+              <td class="fw-bold">$<%= order.totalAmount.toFixed(2) %></td>
+              <td><span class="status-badge status-<%= order.status || 'Pending' %>"><%= order.status || 'Pending' %></span></td>
+              <td style="min-width: 180px;">
+                <!-- 🔍 View Details Button -->
+                <a href="/orders/admin/orders/<%= order._id %>" class="btn btn-sm btn-outline-info w-100 mb-2">View Details</a>
+
+                <!-- 🔄 Status Update Form -->
+                <form method="POST" action="/orders/admin/orders/<%= order._id %>/status">
+                  <select name="status" class="form-select form-select-sm mb-2">
+                    <% ['Pending', 'Shipped', 'Delivered', 'Cancelled'].forEach(s => { %>
+                      <option value="<%= s %>" <%= order.status === s ? 'selected' : '' %>><%= s %></option>
+                    <% }) %>
+                  </select>
+                  <button class="btn btn-sm btn-primary w-100" type="submit">Update</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
   <% } %>
 </div>
 

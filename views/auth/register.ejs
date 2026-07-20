@@ -1,67 +1,197 @@
 <%- include('../partials/header') %>
 
+<style>
+  .auth-wrap {
+    max-width: 450px;
+    margin: 3rem auto;
+    background: #fff;
+    border-radius: 16px;
+    padding: 2.4rem 2.2rem;
+    box-shadow: 0 16px 36px rgba(0,0,0,0.08);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: authIn 0.55s cubic-bezier(0.22,1,0.36,1) forwards;
+  }
+  @keyframes authIn { to { opacity: 1; transform: translateY(0); } }
+
+  .auth-wrap .brand-badge {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: #FFDB00;
+    color: #004F9E;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 1.2rem;
+    margin: 0 auto 1rem;
+    animation: badgeFloat 4s ease-in-out infinite;
+  }
+  @keyframes badgeFloat { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-6px) rotate(4deg); } }
+
+  .auth-wrap h2 {
+    text-align: center;
+    font-weight: 700;
+    color: #004F9E;
+  }
+
+  .auth-wrap .form-field {
+    margin-bottom: 1.1rem;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fieldIn 0.45s ease-out forwards;
+  }
+  .auth-wrap .form-field:nth-of-type(1) { animation-delay: 0.10s; }
+  .auth-wrap .form-field:nth-of-type(2) { animation-delay: 0.17s; }
+  .auth-wrap .form-field:nth-of-type(3) { animation-delay: 0.24s; }
+  .auth-wrap .form-field:nth-of-type(4) { animation-delay: 0.31s; }
+  @keyframes fieldIn { to { opacity: 1; transform: translateY(0); } }
+
+  .auth-wrap label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+    display: block;
+  }
+
+  .auth-wrap .form-control {
+    border: none;
+    border-bottom: 2px solid #dfe3e8;
+    border-radius: 0;
+    padding: 0.55rem 0.1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .auth-wrap .form-control:focus {
+    border-color: #004F9E;
+    box-shadow: none;
+  }
+  .auth-wrap textarea.form-control { resize: vertical; }
+
+  .auth-wrap .strength {
+    height: 4px; background: #e6e9ee; border-radius: 2px; margin-top: 6px; overflow: hidden;
+  }
+  .auth-wrap .strength-fill {
+    height: 100%; width: 0%; background: #004F9E; transition: width 0.3s ease, background 0.3s ease;
+  }
+
+  .auth-wrap .btn-primary {
+    background-color: #FFDB00;
+    border-color: #FFDB00;
+    color: #004F9E;
+    font-weight: 700;
+    border-radius: 30px;
+    padding: 0.65rem;
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fieldIn 0.45s ease-out 0.4s forwards;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+  .auth-wrap .btn-primary:hover {
+    background-color: #FFDB00;
+    color: #004F9E;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 22px rgba(255,219,0,0.4);
+  }
+
+  .auth-wrap .text-center.mt-3 {
+    opacity: 0;
+    animation: fieldIn 0.45s ease-out 0.48s forwards;
+  }
+  .auth-wrap a {
+    color: #004F9E;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .auth-wrap a:hover { text-decoration: underline; }
+
+  .auth-wrap .alert-danger {
+    opacity: 0;
+    animation: fieldIn 0.4s ease-out forwards;
+  }
+</style>
+
 <div class="container mt-5" style="max-width: 450px;">
-  <h2 class="mb-4 text-center">Register</h2>
+  <div class="auth-wrap">
+    <div class="brand-badge">+</div>
+    <h2 class="mb-4">Register</h2>
 
-  <% if (error) { %>
-    <div class="alert alert-danger"><%= error %></div>
-  <% } %>
+    <% if (error) { %>
+      <div class="alert alert-danger"><%= error %></div>
+    <% } %>
 
-  <form id="registerForm" method="POST" action="/register" novalidate>
-    <div class="mb-3">
-      <label>Full Name</label>
-      <input
-        type="text"
-        name="name"
-        class="form-control"
-        required
-        placeholder="Your full name"
-      >
+    <form id="registerForm" method="POST" action="/register" novalidate>
+      <div class="mb-3 form-field">
+        <label>Full Name</label>
+        <input
+          type="text"
+          name="name"
+          class="form-control"
+          required
+          placeholder="Your full name"
+        >
+      </div>
+
+      <div class="mb-3 form-field">
+        <label>Email</label>
+        <input
+          type="email"
+          name="email"
+          class="form-control"
+          required
+          placeholder="you@example.com"
+        >
+      </div>
+
+      <div class="mb-3 form-field">
+        <label>Password</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          class="form-control"
+          required
+          minlength="6"
+          placeholder="At least 6 characters"
+        >
+        <div class="strength"><div class="strength-fill" id="strengthFill"></div></div>
+      </div>
+
+      <div class="mb-3 form-field">
+        <label>Address</label>
+        <textarea
+          name="address"
+          class="form-control"
+          rows="3"
+          required
+          placeholder="Enter your address"
+        ></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">Register</button>
+    </form>
+
+    <div class="text-center mt-3">
+      <p class="text-muted mb-0">Already have an account?
+        <a href="/login">Login here</a>
+      </p>
     </div>
-
-    <div class="mb-3">
-      <label>Email</label>
-      <input
-        type="email"
-        name="email"
-        class="form-control"
-        required
-        placeholder="you@example.com"
-      >
-    </div>
-
-    <div class="mb-3">
-      <label>Password</label>
-      <input
-        type="password"
-        name="password"
-        class="form-control"
-        required
-        minlength="6"
-        placeholder="At least 6 characters"
-      >
-    </div>
-
-    <div class="mb-3">
-      <label>Address</label>
-      <textarea
-        name="address"
-        class="form-control"
-        rows="3"
-        required
-        placeholder="Enter your address"
-      ></textarea>
-    </div>
-
-    <button type="submit" class="btn btn-primary w-100">Register</button>
-  </form>
-
-  <div class="text-center mt-3">
-    <p class="text-muted">Already have an account?
-      <a href="/login">Login here</a>
-    </p>
   </div>
 </div>
+
+<script>
+  const pw = document.getElementById('password');
+  const fill = document.getElementById('strengthFill');
+  if (pw && fill) {
+    pw.addEventListener('input', () => {
+      const v = pw.value;
+      let score = 0;
+      if (v.length >= 6) score += 1;
+      if (v.length >= 10) score += 1;
+      if (/[0-9]/.test(v)) score += 1;
+      if (/[^A-Za-z0-9]/.test(v)) score += 1;
+      const pct = (score / 4) * 100;
+      fill.style.width = pct + '%';
+      fill.style.background = pct < 50 ? '#c0392b' : pct < 100 ? '#FFDB00' : '#2e7d32';
+    });
+  }
+</script>
 
 <script src="/js/validation.js"></script>
 <%- include('../partials/footer') %>

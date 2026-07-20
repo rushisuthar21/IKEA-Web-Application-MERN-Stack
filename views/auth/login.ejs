@@ -1,46 +1,209 @@
-<%- include('../partials/header') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - IKEA</title>
+  <link rel="icon" href="/public/images/fav/favicon.ico" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/styles.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
 
-<div class="container mt-5" style="max-width: 400px;">
-  <h2 class="mb-4 text-center">Login</h2>
+  <style>
+    :root {
+      --ikea-blue: #004F9E;
+      --ikea-yellow: #FFDB00;
+      --ink: #1A1A1A;
+      --bg: #f8f9fa;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: 'Arial', sans-serif; background: var(--bg); color: var(--ink);
+    }
+    h1, h2, h3, h4 { font-family: 'Poppins', Arial, sans-serif; }
 
-  <% if (error) { %>
-    <div class="alert alert-danger"><%= error %></div>
-  <% } %>
+    .login-nav {
+      background-color: var(--ikea-blue);
+      box-shadow: 0 2px 14px rgba(0,0,0,0.15);
+    }
+    .login-nav .nav-link {
+      position: relative;
+      color: #fff !important;
+      font-weight: 500;
+      margin: 0 0.35rem;
+    }
+    .login-nav .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -2px;
+      width: 0%; height: 2px;
+      background: var(--ikea-yellow);
+      transition: width 0.25s ease;
+    }
+    .login-nav .nav-link:hover::after { width: 100%; }
+    .login-nav .btn-outline-light {
+      border-radius: 30px; font-weight: 600;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+    .login-nav .btn-outline-light:hover {
+      transform: translateY(-2px);
+      background: var(--ikea-yellow);
+      border-color: var(--ikea-yellow);
+      color: var(--ikea-blue);
+    }
+    .login-nav .navbar-brand img { height: 38px; }
 
-  <form method="POST" action="/login" novalidate>
-    <div class="mb-3">
-      <label>Email</label>
-      <input
-        type="email"
-        name="email"
-        class="form-control"
-        required
-        placeholder="you@example.com"
-      >
+    .login-stage {
+      min-height: calc(100vh - 64px);
+      display: flex; align-items: center; justify-content: center; padding: 2rem 1rem;
+    }
+
+    .auth-shell {
+      width: 100%; max-width: 940px; min-height: 540px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-radius: 18px; overflow: hidden;
+      box-shadow: 0 24px 50px rgba(0,0,0,0.16);
+      opacity: 0; transform: translateY(20px);
+      animation: shellIn 0.55s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    @keyframes shellIn { to { opacity: 1; transform: translateY(0); } }
+
+    .side-panel {
+      background: var(--ikea-blue); color: #fff; padding: 3rem 2.5rem;
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .side-panel .brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 1.1rem; position: relative; z-index: 2; }
+    .side-panel .brand img { height: 32px; }
+    .side-panel .pitch h2 { font-weight: 700; font-size: 1.7rem; position: relative; z-index: 2; }
+    .side-panel .pitch p { color: #cfe0f4; position: relative; z-index: 2; max-width: 280px; }
+
+    .blob { position: absolute; border-radius: 50%; filter: blur(2px); }
+    .blob-1 { width: 220px; height: 220px; background: radial-gradient(circle, rgba(255,219,0,0.35), transparent 70%); top: -60px; right: -60px; animation: floatA 8s ease-in-out infinite; }
+    .blob-2 { width: 160px; height: 160px; background: radial-gradient(circle, rgba(255,255,255,0.2), transparent 70%); bottom: -40px; left: -40px; animation: floatB 10s ease-in-out infinite; }
+    @keyframes floatA { 0%,100% { transform: translate(0,0);} 50% { transform: translate(-14px, 18px);} }
+    @keyframes floatB { 0%,100% { transform: translate(0,0);} 50% { transform: translate(16px, -14px);} }
+
+    /* Flat-pack "box" motif — a nod to assembly instructions */
+    .box-icon { width: 64px; height: 64px; margin: 1.4rem 0; position: relative; z-index: 2; animation: boxFloat 4.5s ease-in-out infinite; }
+    .box-icon .lid { width: 64px; height: 10px; background: var(--ikea-yellow); border-radius: 2px; }
+    .box-icon .body { width: 64px; height: 50px; border: 2px dashed rgba(255,255,255,0.55); border-radius: 4px; margin-top: 2px; }
+    @keyframes boxFloat { 0%,100% { transform: translateY(0) rotate(-2deg);} 50% { transform: translateY(-8px) rotate(2deg);} }
+
+    .form-side { background: #fff; padding: 3.4rem 3rem; display: flex; flex-direction: column; justify-content: center; }
+    .form-side h1 { font-weight: 700; font-size: 1.9rem; margin-bottom: 0.3rem; color: var(--ink); }
+    .form-side .sub { color: #6b7280; margin-bottom: 1.6rem; }
+
+    .field { position: relative; margin-bottom: 1.4rem; opacity: 0; transform: translateY(14px); animation: fieldIn 0.5s ease-out forwards; }
+    .field:nth-of-type(1) { animation-delay: 0.12s; }
+    .field:nth-of-type(2) { animation-delay: 0.22s; }
+    @keyframes fieldIn { to { opacity: 1; transform: translateY(0); } }
+
+    .field label { display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .field input {
+      width: 100%; border: none; border-bottom: 2px solid #dfe3e8; background: transparent;
+      padding: 0.55rem 0.1rem; font-size: 1rem; color: var(--ink); outline: none; transition: border-color 0.3s ease;
+    }
+    .field input:focus { border-color: var(--ikea-blue); }
+    .field .underline-fx { position: absolute; left: 0; bottom: 0; height: 2px; width: 0; background: var(--ikea-yellow); transition: width 0.3s ease; }
+    .field input:focus ~ .underline-fx { width: 100%; }
+
+    .row-between {
+      display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem; margin-bottom: 1.6rem;
+      opacity: 0; transform: translateY(14px); animation: fieldIn 0.5s ease-out 0.32s forwards;
+    }
+    .row-between a { color: var(--ikea-blue); text-decoration: none; }
+    .row-between a:hover { text-decoration: underline; }
+
+    .btn-ikea {
+      background: var(--ikea-yellow); color: var(--ikea-blue); border: none; padding: 0.75rem;
+      border-radius: 30px; font-weight: 700; width: 100%;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      opacity: 0; transform: translateY(14px); animation: fieldIn 0.5s ease-out 0.42s forwards;
+    }
+    .btn-ikea:hover { transform: translateY(-2px); box-shadow: 0 12px 22px rgba(255,219,0,0.4); }
+    .btn-ikea:active { transform: translateY(0); }
+
+    .switch-line { text-align: center; margin-top: 1.6rem; font-size: 0.92rem; color: #6b7280; opacity: 0; animation: fieldIn 0.5s ease-out 0.52s forwards; }
+    .switch-line a { color: var(--ikea-blue); font-weight: 700; text-decoration: none; }
+    .switch-line a:hover { text-decoration: underline; }
+
+    .error-note {
+      background: #fdecea; color: #b3261e; border: 1px solid #f5c2c0;
+      border-radius: 8px; padding: 0.6rem 0.9rem; font-size: 0.88rem; margin-bottom: 1.2rem;
+      opacity: 0; animation: fieldIn 0.4s ease-out forwards;
+    }
+
+    @media (max-width: 760px) {
+      .auth-shell { grid-template-columns: 1fr; }
+      .side-panel { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-dark navbar-expand-lg login-nav">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center" href="/">
+      <img src="/public/images/ikea.png" alt="IKEA Logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#loginNav" aria-controls="loginNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="loginNav">
+      <div class="ms-auto d-flex flex-column flex-lg-row align-items-lg-center align-items-start gap-1 gap-lg-0 mt-3 mt-lg-0">
+        <a href="/about" class="nav-link">About Us</a>
+        <a href="/contact" class="nav-link">Contact Us</a>
+        <a href="/register" class="btn btn-outline-light btn-sm ms-lg-3 mt-2 mt-lg-0">Register</a>
+      </div>
     </div>
+  </div>
+</nav>
 
-    <div class="mb-3">
-      <label>Password</label>
-      <input
-        type="password"
-        name="password"
-        class="form-control"
-        required
-        minlength="6"
-        placeholder="••••••"
-      >
+<div class="login-stage">
+<div class="auth-shell">
+  <div class="side-panel">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="brand"><img src="/public/images/ikea.png" alt="IKEA logo"></div>
+    <div class="pitch">
+      <div class="box-icon"><div class="lid"></div><div class="body"></div></div>
+      <h2>Everything for<br>a better home.</h2>
+      <p>Log in to track orders, save your cart, and check out faster next time.</p>
     </div>
+    <div></div>
+  </div>
 
-    <button type="submit" class="btn btn-primary w-100">Login</button>
-  </form>
+  <div class="form-side">
+    <h1>Welcome back</h1>
+    <p class="sub">Log in to your account</p>
 
-  <!-- 🔗 Register Link -->
-  <div class="text-center mt-3">
-    <p class="text-muted">Don't have an account?
-      <a href="/register">Register here</a>
-    </p>
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="error-note"><%= error %></div>
+    <% } %>
+
+    <form action="/login" method="POST">
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required autofocus>
+        <span class="underline-fx"></span>
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required>
+        <span class="underline-fx"></span>
+      </div>
+      <div class="row-between">
+        <label><input type="checkbox" name="remember"> Remember me</label>
+        <a href="#">Forgot password?</a>
+      </div>
+      <button type="submit" class="btn-ikea">Log in</button>
+    </form>
+    <div class="switch-line">New here? <a href="/register">Create an account</a></div>
   </div>
 </div>
+</div>
 
-<script src="/js/validation.js"></script>
-<%- include('../partials/footer') %>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

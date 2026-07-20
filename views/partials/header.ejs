@@ -2,42 +2,58 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IKEA</title>
   <link rel="icon" href="/public/images/fav/favicon.ico" type="image/x-icon"> <!-- Favicon -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link href="/css/styles.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-dark" style="background-color: #004F9E;">
-        <a class="navbar-brand d-flex align-items-center fw-bold fs-4 text-white" href="/">
-          <img src="/public/images/ikea.png" alt="IKEA Logo" height="40" class="me-2">
-        </a>
+  <nav class="navbar navbar-dark navbar-expand-lg ikea-navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex align-items-center fw-bold fs-4" href="/">
+        <img src="/public/images/ikea.png" alt="IKEA Logo" height="40" class="me-2">
+      </a>
 
-        <div class="d-flex align-items-center">
-          <a href="/about" class="nav-link text-white me-3">About Us</a>
-          <a href="/contact" class="nav-link text-white me-3">Contact Us</a>
-      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <div class="ms-auto d-flex flex-column flex-lg-row align-items-lg-center align-items-start gap-1 gap-lg-0 mt-3 mt-lg-0">
+          <a href="/about" class="nav-link">About Us</a>
+          <a href="/contact" class="nav-link">Contact Us</a>
+
           <% if (user) { %>
             <% if (user.role === 'admin') { %>
-              <a href="/products" class="nav-link text-white me-3">Dashboard</a>
-              <a href="/orders/admin/orders" class="nav-link text-white me-3">Orders</a>
+              <a href="/products" class="nav-link">Dashboard</a>
+              <a href="/orders/admin/orders" class="nav-link">Orders</a>
             <% } else { %>
-              <a href="/products" class="nav-link text-white me-3">Shop</a>
-              <a href="/cart" class="nav-link text-white me-3">Cart</a>
-              <a href="/orders/my" class="nav-link text-white me-3">My Orders</a>
+              <a href="/products" class="nav-link">Shop</a>
+              <a href="/cart" class="nav-link cart-badge">
+                <i class='bx bx-cart'></i> Cart
+              </a>
+              <a href="/orders/my" class="nav-link">My Orders</a>
             <% } %>
-            <a href="/logout" class="btn btn-outline-light btn-sm">Logout</a>
+            <a href="/logout" class="btn btn-outline-light btn-sm ms-lg-3 mt-2 mt-lg-0">Logout</a>
           <% } else { %>
-            <a href="/login" class="btn btn-outline-light btn-sm me-2">Login</a>
-            <a href="/register" class="btn btn-outline-light btn-sm">Register</a>
+            <a href="/login" class="btn btn-outline-light btn-sm ms-lg-3 mt-2 mt-lg-0 me-2">Login</a>
+            <a href="/register" class="btn btn-outline-light btn-sm mt-2 mt-lg-0">Register</a>
           <% } %>
         </div>
-      </nav>
-      
-      <% if (user) { %>
-        <div class="container mt-2">
-          <p class="text-end text-muted">Welcome, <%= user.name || user.email %></p>
-        </div>
-      <% } %>
+      </div>
+    </div>
+  </nav>
+
+  <% if (user) { %>
+    <div class="welcome-strip">
+      <div class="container">
+        <p class="text-end text-muted mb-0"><i class='bx bxs-user-check'></i> Welcome, <%= user.name || user.email %></p>
+      </div>
+    </div>
+  <% } %>
 </body>
 </html>

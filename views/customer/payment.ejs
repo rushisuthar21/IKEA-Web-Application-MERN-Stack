@@ -1,59 +1,64 @@
 <%- include('../partials/header') %>
 
-<div class="container mt-4" style="max-width: 500px;">
-  <h2 class="mb-4">Payment</h2>
+<div class="container mt-4 mb-5" style="max-width: 560px;">
+  <h2 class="page-title center" data-aos="fade-up"><i class='bx bx-credit-card'></i> Payment</h2>
 
-  <!-- 🛑 Error alert if backend sends error -->
-  <% if (error) { %>
-    <div class="alert alert-danger"><%= error %></div>
-  <% } %>
+  <div class="content-panel" data-aos="fade-up">
+    <!-- 🛑 Error alert if backend sends error -->
+    <% if (error) { %>
+      <div class="alert alert-danger"><%= error %></div>
+    <% } %>
 
-  <form action="/orders/payment" method="POST" id="paymentForm" novalidate>
-    <div class="mb-3">
-      <label>Card Number</label>
-      <input
-        type="text"
-        name="cardNumber"
-        class="form-control"
-        required
-        pattern="\d{16}"
-        inputmode="numeric"
-        maxlength="16"
-        placeholder="1234 5678 9012 3456"
-        title="Enter a 16-digit card number"
-      >
-    </div>
+    <form action="/orders/payment" method="POST" id="paymentForm" novalidate>
+      <div class="mb-3">
+        <label>Card Number</label>
+        <input
+          type="text"
+          name="cardNumber"
+          class="form-control"
+          required
+          pattern="\d{16}"
+          inputmode="numeric"
+          maxlength="16"
+          placeholder="1234 5678 9012 3456"
+          title="Enter a 16-digit card number"
+        >
+      </div>
 
-    <div class="mb-3">
-      <label>Expiry Date (MM/YY)</label>
-      <input
-        type="text"
-        name="expiry"
-        class="form-control"
-        required
-        pattern="^(0[1-9]|1[0-2])\/\d{2}$"
-        placeholder="MM/YY"
-        title="Enter expiry in MM/YY format (01-12 for month)"
-      >
-    </div>
+      <div class="row">
+        <div class="mb-3 col-7">
+          <label>Expiry Date (MM/YY)</label>
+          <input
+            type="text"
+            name="expiry"
+            class="form-control"
+            required
+            pattern="^(0[1-9]|1[0-2])\/\d{2}$"
+            placeholder="MM/YY"
+            title="Enter expiry in MM/YY format (01-12 for month)"
+          >
+        </div>
 
-    <div class="mb-3">
-      <label>CVV</label>
-      <input
-        type="password"
-        name="cvv"
-        class="form-control"
-        required
-        pattern="\d{3}"
-        maxlength="3"
-        inputmode="numeric"
-        placeholder="123"
-        title="3-digit CVV"
-      >
-    </div>
+        <div class="mb-3 col-5">
+          <label>CVV</label>
+          <input
+            type="password"
+            name="cvv"
+            class="form-control"
+            required
+            pattern="\d{3}"
+            maxlength="3"
+            inputmode="numeric"
+            placeholder="123"
+            title="3-digit CVV"
+          >
+        </div>
+      </div>
 
-    <button class="btn btn-success w-100">Pay Now</button>
-  </form>
+      <button class="btn btn-success w-100"><i class='bx bx-lock-alt'></i> Pay Now</button>
+    </form>
+    <p class="text-muted small text-center mt-3 mb-0"><i class='bx bx-shield-quarter'></i> Your payment information is encrypted and secure.</p>
+  </div>
 </div>
 
 <script src="/js/validation.js"></script>
