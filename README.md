@@ -2,15 +2,15 @@
 This project is a full-stack eCommerce web application built using the MERN stack (MongoDB, Express.js, React.js, Node.js). The application is designed to mimic an online IKEA-style home decor and furniture store, offering a seamless shopping experience for users along with robust admin management features.
 
 The Webiste look like this:
-<img width="1920" height="1080" alt="Screenshot (326)" src="https://github.com/user-attachments/assets/2ba63839-431b-4476-923c-49f5b8244ecc" />
-<img width="1920" height="1080" alt="Screenshot (328)" src="https://github.com/user-attachments/assets/475e1463-1188-4e42-9a8e-b92a6d1764e3" />
-<img width="1920" height="1080" alt="Screenshot (327)" src="https://github.com/user-attachments/assets/0346b73f-ae82-4a1a-982b-5c75cb73c634" />
-<img width="1920" height="1080" alt="Screenshot (333)" src="https://github.com/user-attachments/assets/100ee885-8107-4021-872e-eef28acdd14b" />
-<img width="1920" height="1080" alt="Screenshot (334)" src="https://github.com/user-attachments/assets/fe39b17c-5992-4307-bbb2-80c203826f0b" />
-<img width="1920" height="1080" alt="Screenshot (329)" src="https://github.com/user-attachments/assets/3ef55118-dbeb-424e-bb34-ff12a836adfc" />
-<img width="1920" height="1080" alt="Screenshot (330)" src="https://github.com/user-attachments/assets/1a29ba97-0aaf-43af-b497-6fe49edec42e" />
-<img width="1920" height="1080" alt="Screenshot (331)" src="https://github.com/user-attachments/assets/daa107d6-a25b-4b04-85d6-e38365ba5816" />
-<img width="1920" height="1080" alt="Screenshot (332)" src="https://github.com/user-attachments/assets/98228dd1-f434-450d-8b1a-7837ba245800" />
+<img width="1885" height="889" alt="Screenshot (326)" src="https://github.com/user-attachments/assets/12dfd655-7a8f-4cb9-8d9e-08447e1c710b" />
+<img width="1892" height="871" alt="Screenshot (327)" src="https://github.com/user-attachments/assets/ac1157df-a3bf-4854-b667-44aa13fe7816" />
+<img width="1920" height="878" alt="Screenshot (328)" src="https://github.com/user-attachments/assets/daabec69-67b7-49a9-bf31-7800cad921f5" />
+<img width="1920" height="855" alt="Screenshot (333)" src="https://github.com/user-attachments/assets/089cf3a3-6006-4675-987f-3b03c621b37d" />
+<img width="1920" height="845" alt="Screenshot (334)" src="https://github.com/user-attachments/assets/2b382f3f-a2fc-422f-ab0f-cd2c88148f40" />
+<img width="1920" height="867" alt="Screenshot (329)" src="https://github.com/user-attachments/assets/1288b7b8-1b32-4dd2-90e4-f99621c25765" />
+<img width="1920" height="881" alt="Screenshot (330)" src="https://github.com/user-attachments/assets/ca470919-c01d-4722-82aa-cb3e02737837" />
+<img width="1920" height="875" alt="Screenshot (331)" src="https://github.com/user-attachments/assets/5aacde88-8bd3-455d-9b4f-16e22eb44390" />
+<img width="1920" height="860" alt="Screenshot (332)" src="https://github.com/user-attachments/assets/bdcd6c3c-63e3-4dad-b315-c40ddbf8ef4a" />
 
 
 📌 Project Overview
